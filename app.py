@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, send_file, jsonify, send_from
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from pypdf import PdfReader, PdfWriter
-import fitz  # PyMuPDF
+import fitz  
 
 import os
 import tempfile
