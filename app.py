@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, send_file, jsonify, send_from
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from pypdf import PdfReader, PdfWriter
-import fitz  
-
+try:
+    import fitz  # PyMuPDF
+except ImportError:
+    fitz = None
+ 
 import platform
 import shutil
 
@@ -685,8 +688,14 @@ def pdf_to_image():
         file.save(pdf_path)
 
         # OPEN PDF
+        
+        if not fitz:
+            return jsonify({
+        "error": "This feature is not supported on the cloud server"
+    }), 400
         doc = fitz.open(pdf_path)
         total_pages = len(doc)
+
 
         # PAGE RANGE LOGIC
         start_page = 1
