@@ -4,6 +4,9 @@ from werkzeug.utils import secure_filename
 from pypdf import PdfReader, PdfWriter
 import fitz  
 
+import platform
+import shutil
+
 import os
 import tempfile
 import shutil
